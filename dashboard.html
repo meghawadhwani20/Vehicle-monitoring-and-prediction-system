@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Vehicle Count and Traffic Prediction System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            background-color: var(--white);
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            margin-top: 2rem;
+            height: calc(100vh - 200px);
+        }
+
+        .dashboard-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">VisionTraffic</div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="prediction.html"><i class="fas fa-crystal-ball"></i> Prediction</a></li>
+            <li><a href="data.html"><i class="fas fa-table"></i> Data Tables</a></li>
+            <li><a href="insights.html"><i class="fas fa-lightbulb"></i> Insights</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Traffic Analytics Dashboard</h1>
+        <p>Real-time traffic monitoring and analysis</p>
+        
+        <div class="dashboard-container">
+            <!-- Replace the src with your actual Power BI dashboard embed URL -->
+            <iframe 
+                class="dashboard-iframe"
+                src="YOUR_POWER_BI_EMBED_URL"
+                frameborder="0" 
+                allowFullScreen="true">
+            </iframe>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Vehicle Count and Traffic Prediction System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 

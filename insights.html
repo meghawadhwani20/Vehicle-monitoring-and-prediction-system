@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insights - Vehicle Count and Traffic Prediction System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .insight-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+        }
+
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .insight-card h3 {
+            color: var(--primary-text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-top: 1rem;
+        }
+
+        .route-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .route-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .route-item:last-child {
+            border-bottom: none;
+        }
+
+        .route-name {
+            color: var(--primary-text);
+            font-weight: 500;
+        }
+
+        .congestion-level {
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .congestion-high {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--traffic-red);
+        }
+
+        .congestion-medium {
+            background-color: rgba(251, 191, 36, 0.1);
+            color: var(--traffic-yellow);
+        }
+
+        .congestion-low {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--traffic-green);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">VisionTraffic</div>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="prediction.html"><i class="fas fa-crystal-ball"></i> Prediction</a></li>
+            <li><a href="data.html"><i class="fas fa-table"></i> Data Tables</a></li>
+            <li><a href="insights.html" class="active"><i class="fas fa-lightbulb"></i> Insights</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>Traffic Insights</h1>
+        <p>Key insights and analytics from traffic data</p>
+        
+        <div class="insights-grid">
+            <div class="insight-card">
+                <h3><i class="fas fa-road"></i> Top 5 Congested Cities</h3>
+                <ul class="route-list">
+                    <li class="route-item">
+                        <span class="route-name">Lucknow</span>
+                        <span class="congestion-level congestion-high">33.1%</span>
+                    </li>
+                    <li class="route-item">
+                        <span class="route-name">Banglore</span>
+                        <span class="congestion-level congestion-high">23.2%</span>
+                    </li>
+                    <li class="route-item">
+                        <span class="route-name">Agra</span>
+                        <span class="congestion-level congestion-medium">18.7%</span>
+                    </li>
+                    <li class="route-item">
+                        <span class="route-name">Chennai </span>
+                        <span class="congestion-level congestion-medium">8.4%</span>
+                    </li>
+                    <li class="route-item">
+                        <span class="route-name">Bhopal</span>
+                        <span class="congestion-level congestion-low">6.1%</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="insight-card">
+                <h3><i class="fas fa-tachometer-alt"></i> Average Speed During Peak Hours</h3>
+                <div class="chart-container">
+                    <canvas id="speedChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insight-card">
+                <h3><i class="fas fa-chart-line"></i> Weekly Traffic Trend</h3>
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Vehicle Count and Traffic Prediction System. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Speed Chart
+        const speedCtx = document.getElementById('speedChart').getContext('2d');
+        new Chart(speedCtx, {
+            type: 'line',
+            data: {
+                labels: ['7 AM', '8 AM', '9 AM', '4 PM', '5 PM', '6 PM'],
+                datasets: [{
+                    label: 'Average Speed (km/h)',
+                    data: [24, 18, 22, 16, 19, 30],
+                    borderColor: '#10B981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#6B7280'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Speed (km/h)',
+                            color: '#6B7280'
+                        },
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Weekly Trend Chart
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        new Chart(trendCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Average Daily Traffic',
+                    data: [1200, 1852, 1400, 2612, 1932, 800, 600],
+                    backgroundColor: '#10B981',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#6B7280'
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Vehicle Count',
+                            color: '#6B7280'
+                        },
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            color: '#E5E7EB'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

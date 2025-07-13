@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Count and Traffic Prediction System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+            z-index: -1;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+            padding: 0 1rem;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+            aspect-ratio: 16/9;
+            background-color: var(--primary-accent);
+        }
+
+        .image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-normal);
+        }
+
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background-color: var(--card-bg);
+            color: var(--primary-text);
+        }
+
+        .image-overlay h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-text);
+        }
+
+        .image-overlay p {
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+        }
+
+        @media (max-width: 1024px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">VisionTraffic</div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="prediction.html"><i class="fas fa-crystal-ball"></i> Prediction</a></li>
+            <li><a href="data.html"><i class="fas fa-table"></i> Data Tables</a></li>
+            <li><a href="insights.html"><i class="fas fa-lightbulb"></i> Insights</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Welcome to VisionTraffic</h1>
+            <p>Intelligent traffic monitoring and prediction for smarter urban mobility</p>
+            <div class="cta-buttons">
+                <a href="dashboard.html" class="btn primary">View Dashboard</a>
+                <a href="prediction.html" class="btn secondary">Make Prediction</a>
+            </div>
+        </section>
+
+        <div class="image-grid">
+            <div class="image-card">
+                <div class="image-overlay">
+                    <h3>AI Traffic Prediction</h3>
+                    <p>Advanced algorithms predict traffic patterns and congestion</p>
+                </div>
+            </div>
+            <div class="image-card">
+                <div class="image-overlay">
+                    <h3>Smart Monitoring</h3>
+                    <p>Real-time vehicle counting and traffic analysis</p>
+                </div>
+            </div>
+            <div class="image-card">
+                <div class="image-overlay">
+                    <h3>Data Analytics</h3>
+                    <p>Comprehensive traffic insights and visualizations</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Real-time Analytics</h3>
+                <p>Monitor traffic patterns and vehicle counts in real-time</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-brain"></i>
+                <h3>AI Predictions</h3>
+                <p>Get accurate traffic predictions using advanced AI models</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-database"></i>
+                <h3>Data Management</h3>
+                <p>Access and export comprehensive traffic data</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 VisionTraffic. All rights reserved.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 
